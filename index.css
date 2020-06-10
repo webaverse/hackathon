@@ -1539,7 +1539,8 @@ header.unlocking + .main .blocker .button
   color: #FFF;
 }
 .hero h1,
-.hero h2
+.hero h2,
+.hero p
 {
   margin-bottom: 10px;
   font-family: 'Bangers';
