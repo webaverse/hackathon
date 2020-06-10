@@ -1442,7 +1442,7 @@ header.unlocking + .main .blocker .button
   top: -50vh;
   bottom: -50vh;
   width: 50vw;
-  background-color: currentColor;
+  background-color: var(--heroColor);
 }
 .hero .bar {
   position: absolute;
@@ -1450,7 +1450,40 @@ header.unlocking + .main .blocker .button
   right: 0;
   height: 10px;
   bottom: 0;
-  background-color: currentColor;
+  background-color: var(--heroColor);
+}
+.hero .icons {
+  position: absolute;
+  bottom: 30px;
+  display: flex;
+  z-index: 1;
+}
+.hero .icons .icon {
+  display: flex;
+  margin-right: 30px;
+  border: 10px solid var(--heroColor);
+  border-bottom: 0;
+  flex-direction: column;
+}
+.hero .icons .icon img,
+.hero .icons .icon i
+{
+  display: flex;
+  width: 100px;
+  height: 120px;
+  background-color: #000;
+  color: #FFF;
+  font-size: 30px;
+  justify-content: center;
+  align-items: center;
+}
+.hero .icons .label {
+  display: flex;
+  height: 40px;
+  color: #000;
+  font-size: 16px;
+  background-color: var(--heroColor);
+  align-items: center;
 }
 .hero.left {
   align-items: flex-start;
@@ -1466,17 +1499,23 @@ header.unlocking + .main .blocker .button
   right: -10vw;
   transform: rotatez(10deg);
 }
+.hero.left .icons {
+  left: calc(50vw + 100px);
+}
+.hero.right .icons {
+  left: calc(100px);
+}
 .hero.red {
-  color: #66bb6a;
+  --heroColor: #66bb6a;
 }
 .hero.green {
-  color: #ffa726;
+  --heroColor: #ffa726;
 }
 .hero.blue {
-  color: #5c6bc0;
+  --heroColor: #5c6bc0;
 }
 .hero.yellow {
-  color: #7e57c2;
+  --heroColor: #7e57c2;
 }
 .hero .wrap {
   position: relative;
