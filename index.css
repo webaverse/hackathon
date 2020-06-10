@@ -1434,7 +1434,7 @@ header.unlocking + .main .blocker .button
   color: transparent;
   flex-direction: column;
   justify-content: center;
-  pointer-events: none;
+  /* pointer-events: none; */
   overflow: hidden;
 }
 .hero .background {
@@ -1529,6 +1529,7 @@ header.unlocking + .main .blocker .button
   width: 100%;
 }
 .hero h1,
+.hero h2,
 .hero p,
 .hero-buttons
 {
@@ -1537,17 +1538,32 @@ header.unlocking + .main .blocker .button
   background-color: #000;
   color: #FFF;
 }
-.hero h1 {
+.hero h1,
+.hero h2
+{
   margin-bottom: 10px;
   font-family: 'Bangers';
-  font-size: 50px;
   letter-spacing: 5px;
+}
+.hero h1 {
+  font-size: 50px;
+}
+.hero h2 {
+  font-size: 36px;
+  background-color: #ec407a;
 }
 .hero p {
   font-size: 20px;
 }
 .hero p .hi {
   font-weight: 600;
+}
+.hero form {
+  position: absolute;
+  left: 0;
+  padding: 30px;
+  background-color: #7e57c2;
+  color: #FFF;
 }
 .hero-buttons {
   display: flex;
