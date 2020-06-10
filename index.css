@@ -1456,7 +1456,7 @@ header.unlocking + .main .blocker .button
   position: absolute;
   bottom: 30px;
   display: flex;
-  z-index: 1;
+  /* z-index: 1; */
 }
 .hero .icons .icon {
   display: flex;
