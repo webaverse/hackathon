@@ -20,6 +20,18 @@ const _findObject = (o, name) => {
 };
 
 (async () => {
+  Array.from(document.querySelectorAll('.icons')).forEach(iconsEl => {
+    const iconsEls = Array.from(iconsEl.querySelectorAll('.icon'));
+    iconsEls.forEach(iconEl => {
+      iconEl.addEventListener('click', e => {
+        iconsEls.forEach(iconEl => {
+          iconEl.classList.remove('selected');
+        });
+        iconEl.classList.add('selected');
+      });
+    });
+  });
+
   console.log('start engine 1');
   const pe = new XRPackageEngine({
     orbitControls: true,

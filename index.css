@@ -1464,6 +1464,18 @@ header.unlocking + .main .blocker .button
   border: 10px solid var(--heroColor);
   border-bottom: 0;
   flex-direction: column;
+  cursor: pointer;
+}
+.hero .icons .icon.selected,
+.hero .icons .icon:hover
+{
+  border-color: var(--heroColor2);
+}
+.hero .icons .icon.selected .label,
+.hero .icons .icon:hover .label
+{
+  background-color: var(--heroColor2);
+  /* color: #FFF; */
 }
 .hero .icons .icon img,
 .hero .icons .icon i
@@ -1507,15 +1519,19 @@ header.unlocking + .main .blocker .button
 }
 .hero.red {
   --heroColor: #66bb6a;
+  --heroColor2: #ec407a;
 }
 .hero.green {
   --heroColor: #ffa726;
+  --heroColor2: #ec407a;
 }
 .hero.blue {
   --heroColor: #5c6bc0;
+  --heroColor2: #ec407a;
 }
 .hero.yellow {
   --heroColor: #7e57c2;
+  --heroColor2: #ec407a;
 }
 .hero .wrap {
   position: relative;
