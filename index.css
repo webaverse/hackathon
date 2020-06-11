@@ -1543,6 +1543,9 @@ header.unlocking + .main .blocker .button
 .hero p
 {
   margin-bottom: 10px;
+}
+.hero h1,
+.hero h2 {
   font-family: 'Bangers';
   letter-spacing: 5px;
 }
