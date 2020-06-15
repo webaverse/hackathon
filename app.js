@@ -18,23 +18,10 @@ const _findObject = (o, name) => {
 };
 
 (async () => {
-  Array.from(document.querySelectorAll('.icons')).forEach(iconsEl => {
-    const iconsEls = Array.from(iconsEl.querySelectorAll('.icon'));
-    iconsEls.forEach(iconEl => {
-      iconEl.addEventListener('click', e => {
-        iconsEls.forEach(iconEl => {
-          iconEl.classList.remove('selected');
-        });
-        iconEl.classList.add('selected');
-      });
-    });
-  });
-
-  console.log('start engine 1');
+  // engine
   const pe = new XRPackageEngine({
     orbitControls: true,
   });
-  console.log('start engine 1');
   document.body.appendChild(pe.domElement);
   pe.domElement.style.backgroundColor = '#111';
   
@@ -44,66 +31,46 @@ const _findObject = (o, name) => {
 
   pe.orbitControls.target.set(0, 1, 0);
 
-  /* {
-    const renderer = new THREE.WebGLRenderer({
-      canvas: pe.domElement,
-      context: pe.getContext('webgl'),
-      // antialias: true,
-      // alpha: true,
-      // preserveDrawingBuffer: true,
+  // ui
+  const wbnUrls = [
+    './augs/blob/a.wbn',
+    './augs/lightsaber/a.wbn',
+    './augs/lightsaber/a.wbn',
+    './augs/lightsaber/a.wbn',
+  ];
+
+  let p = null;
+  Array.from(document.querySelectorAll('.icons')).forEach((iconsEl, index) => {
+    const iconsEls = Array.from(iconsEl.querySelectorAll('.icon'));
+    iconsEls.forEach((iconEl, index2) => {
+      iconEl.addEventListener('click', async e => {
+        console.log('click', index);
+        iconsEls.forEach(iconEl => {
+          iconEl.classList.remove('selected');
+        });
+        iconEl.classList.add('selected');
+
+        if (index === 0) {
+          if (p) {
+            await pe.remove(p);
+            p = null;
+          }
+
+          const res = await fetch(wbnUrls[index2]);
+          const ab = await res.arrayBuffer();
+          const uint8Array = new Uint8Array(ab);
+          p = new XRPackage(uint8Array);
+          p.setMatrix(localMatrix.compose(localVector.set(0, 0, 0), localQuaternion.set(0, 0, 0, 1), localVector2.set(1, 1, 1)));
+          await pe.add(p);
+        }
+      });
     });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.autoClear = false;
-    renderer.sortObjects = false;
-    renderer.physicallyCorrectLights = true;
-    renderer.xr.enabled = true;
-    renderer.xr.setSession(pe.getProxySession());
-
-    const scene = new THREE.Scene();
-
-    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 0.5, 1);
-
-    const {scene: logoMesh} = await new Promise((accept, reject) => {
-      new GLTFLoader().load('assets/logo.glb', accept, xhr => {}, reject);
-    });
-    const wMesh = _findObject(logoMesh, 'Webaverse');
-    wMesh.position.set(0, 3 + 1.5, -2);
-    // wMesh.rotation.order = 'YXZ';
-    wMesh.scale.multiplyScalar(1.5, 1.5, 1.5);
-    wMesh.originalPosition = wMesh.position.clone();
-    wMesh.originalQuaternion = wMesh.quaternion.clone();
-    scene.add(wMesh);
-    const webaverseMesh = _findObject(logoMesh, 'W');
-    webaverseMesh.position
-      .sub(new THREE.Box3().setFromObject(webaverseMesh).getCenter(new THREE.Vector3()))
-      .add(new THREE.Vector3(0, 3, -2));
-    // webaverseMesh.rotation.order = 'YXZ';
-    webaverseMesh.originalPosition = webaverseMesh.position.clone();
-    webaverseMesh.originalQuaternion = webaverseMesh.quaternion.clone();
-    scene.add(webaverseMesh);
-
-    function animate(timestamp, frame) {
-      wMesh.position.copy(wMesh.originalPosition).add(new THREE.Vector3(0, Math.sin((Date.now() % 3000) / 3000 * Math.PI * 2) * 0.8, 0));
-      wMesh.quaternion.copy(wMesh.originalQuaternion)
-        .premultiply(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 0, 1), Math.sin((Date.now() % 1500) / 1500 * Math.PI * 2) * 0.15));
-      webaverseMesh.position.copy(webaverseMesh.originalPosition).add(new THREE.Vector3(0, Math.sin((Date.now() % 3000) / 3000 * Math.PI * 2) * 0.5, 0));
-
-      renderer.render(scene, camera);
+    if (index === 0) {
+      iconsEls[0].click();
     }
-    renderer.setAnimationLoop(animate);
-  } */
+  });
 
-  {
-    console.log('load blob');
-    const res = await fetch('./augs/blob/a.wbn');
-    const ab = await res.arrayBuffer();
-    const uint8Array = new Uint8Array(ab);
-    const p = new XRPackage(uint8Array);
-    p.setMatrix(localMatrix.compose(localVector.set(0, 0, 0), localQuaternion.set(0, 0, 0, 1), localVector2.set(1, 1, 1)));
-    await pe.add(p);
-  }
+  // xr
 
   let currentSession = null;
   function onSessionStarted(session) {
