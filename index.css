@@ -1441,7 +1441,7 @@ header.unlocking + .main .blocker .button
   position: absolute;
   top: -50vh;
   bottom: -50vh;
-  width: 50vw;
+  width: calc(50vw + 10vw);
   background-color: var(--heroColor);
 }
 .hero .bar {
@@ -1504,11 +1504,11 @@ header.unlocking + .main .blocker .button
   align-items: flex-end;
 }
 .hero.left .background {
-  left: -10vw;
+  left: -20vw;
   transform: rotatez(-10deg);
 }
 .hero.right .background {
-  right: -10vw;
+  right: -20vw;
   transform: rotatez(10deg);
 }
 .hero.left .icons {
