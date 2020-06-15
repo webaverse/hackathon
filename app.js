@@ -35,7 +35,7 @@ const _findObject = (o, name) => {
   const wbnUrls = [
     './augs/blob/a.wbn',
     './augs/lightsaber/a.wbn',
-    './augs/lightsaber/a.wbn',
+    './augs/tree/a.wbn',
     './augs/lightsaber/a.wbn',
   ];
 
