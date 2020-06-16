@@ -40,28 +40,35 @@ const _findObject = (o, name) => {
   ];
 
   let p = null;
+  let loadingPackage = false;
   Array.from(document.querySelectorAll('.icons')).forEach((iconsEl, index) => {
     const iconsEls = Array.from(iconsEl.querySelectorAll('.icon'));
     iconsEls.forEach((iconEl, index2) => {
       iconEl.addEventListener('click', async e => {
-        console.log('click', index);
-        iconsEls.forEach(iconEl => {
-          iconEl.classList.remove('selected');
-        });
-        iconEl.classList.add('selected');
+        console.log('click', index, loadingPackage);
+        if (!loadingPackage) {
+          loadingPackage = true;
 
-        if (index === 0) {
-          if (p) {
-            await pe.remove(p);
-            p = null;
+          iconsEls.forEach(iconEl => {
+            iconEl.classList.remove('selected');
+          });
+          iconEl.classList.add('selected');
+
+          if (index === 0) {
+            if (p) {
+              await pe.remove(p);
+              p = null;
+            }
+
+            const res = await fetch(wbnUrls[index2]);
+            const ab = await res.arrayBuffer();
+            const uint8Array = new Uint8Array(ab);
+            p = new XRPackage(uint8Array);
+            p.setMatrix(localMatrix.compose(localVector.set(0, 0, 0), localQuaternion.set(0, 0, 0, 1), localVector2.set(1, 1, 1)));
+            await pe.add(p);
           }
 
-          const res = await fetch(wbnUrls[index2]);
-          const ab = await res.arrayBuffer();
-          const uint8Array = new Uint8Array(ab);
-          p = new XRPackage(uint8Array);
-          p.setMatrix(localMatrix.compose(localVector.set(0, 0, 0), localQuaternion.set(0, 0, 0, 1), localVector2.set(1, 1, 1)));
-          await pe.add(p);
+          loadingPackage = false;
         }
       });
     });
