@@ -46,27 +46,25 @@ const _findObject = (o, name) => {
     iconsEls.forEach((iconEl, index2) => {
       iconEl.addEventListener('click', async e => {
         console.log('click', index, loadingPackage);
-        if (!loadingPackage) {
+        iconsEls.forEach(iconEl => {
+          iconEl.classList.remove('selected');
+        });
+        iconEl.classList.add('selected');
+
+        if (index === 0 && !loadingPackage) {
           loadingPackage = true;
 
-          iconsEls.forEach(iconEl => {
-            iconEl.classList.remove('selected');
-          });
-          iconEl.classList.add('selected');
-
-          if (index === 0) {
-            if (p) {
-              await pe.remove(p);
-              p = null;
-            }
-
-            const res = await fetch(wbnUrls[index2]);
-            const ab = await res.arrayBuffer();
-            const uint8Array = new Uint8Array(ab);
-            p = new XRPackage(uint8Array);
-            p.setMatrix(localMatrix.compose(localVector.set(0, 0, 0), localQuaternion.set(0, 0, 0, 1), localVector2.set(1, 1, 1)));
-            await pe.add(p);
+          if (p) {
+            await pe.remove(p);
+            p = null;
           }
+
+          const res = await fetch(wbnUrls[index2]);
+          const ab = await res.arrayBuffer();
+          const uint8Array = new Uint8Array(ab);
+          p = new XRPackage(uint8Array);
+          p.setMatrix(localMatrix.compose(localVector.set(0, 0, 0), localQuaternion.set(0, 0, 0, 1), localVector2.set(1, 1, 1)));
+          await pe.add(p);
 
           loadingPackage = false;
         }
