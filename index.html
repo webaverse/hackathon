@@ -16,18 +16,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/0735724151.js" crossorigin="anonymous"></script>
     <!-- <script type="module" src="world.js"></script> -->
-    <style>
-      #myULContainer {
-        position: fixed;
-        right: 0;
-        width: 300px;
-        margin: 0;
-        top: 50px;
-        bottom: 0;
-        background-color: #FFF;
-        overflow: scroll;
-      }
-    </style>
   </head>
   <body>
     <header class=header id=header>
@@ -181,14 +169,6 @@
         <p>Here's how to get started.</p>
       </div>
     </div>
-    <ul id="myULContainer"></ul> <!-- I will hold the log messages -->
-    <script src="https://cdn.rawgit.com/Alorel/console-log-html/master/console-log-html.min.js"></script>
-    <script>
-        ConsoleLogHTML.connect(document.getElementById("myULContainer")); // Redirect log messages
-        window.onerror = (message, source, lineNum, colNum, error) => {
-          console.warn(message, source, lineNum, colNum, error);
-        };
-    </script>
     <script type=module src="app.js"></script>
   </body>
 </html>
