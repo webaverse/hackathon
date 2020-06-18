@@ -1,6 +1,6 @@
-import THREE from 'https://xrpackage.org/xrpackage/three.module.js';
-import {XRPackageEngine, XRPackage} from 'https://xrpackage.org/xrpackage.js';
-import {GLTFLoader} from 'https://xrpackage.org/xrpackage/GLTFLoader.js';
+import THREE from 'https://static.xrpackage.org/xrpackage/three.module.js';
+import {XRPackageEngine, XRPackage} from 'https://static.xrpackage.org/xrpackage.js';
+import {GLTFLoader} from 'https://static.xrpackage.org/xrpackage/GLTFLoader.js';
 
 const localVector = new THREE.Vector3();
 const localVector2 = new THREE.Vector3();
